@@ -1,5 +1,5 @@
 package com.qa.ims.persistence.dao;
 
-public class ItemDao {
+public class ItemDAO {
 
 }
