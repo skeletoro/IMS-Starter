@@ -11,28 +11,28 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.qa.ims.persistence.domain.Item;
+import com.qa.ims.persistence.domain.ItemTest;
 import com.qa.ims.utils.DBUtils;
 
-public class ItemDAO implements Dao<Item> {
+public class ItemDAO implements Dao<ItemTest> {
 
 	public static final Logger LOGGER = LogManager.getLogger();
 
 	@Override
-	public Item modelFromResultSet(ResultSet resultSet) throws SQLException {
+	public ItemTest modelFromResultSet(ResultSet resultSet) throws SQLException {
 		Long item_Id = resultSet.getLong("item_id");
 		String name = resultSet.getString("name");
 		double value = resultSet.getDouble("value");
-		return new Item(item_Id, name,value);
+		return new ItemTest(item_Id, name,value);
 
 	}
 
 	@Override
-	public List<Item> readAll() {
+	public List<ItemTest> readAll() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement s = connection.createStatement();
 				ResultSet rs = s.executeQuery("SELECT * FROM items");) {
-			List<Item> items = new ArrayList<>();
+			List<ItemTest> items = new ArrayList<>();
 			while (rs.next()) {
 				items.add(modelFromResultSet(rs));
 			}
@@ -45,7 +45,7 @@ public class ItemDAO implements Dao<Item> {
 
 	}
 
-	public Item readLatest() {
+	public ItemTest readLatest() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement s = connection.createStatement();
 				ResultSet rs = s.executeQuery("SELECT * FROM items ORDER BY item_id DESC LIMIT 1");) {
@@ -60,7 +60,7 @@ public class ItemDAO implements Dao<Item> {
 	}
 
 	@Override
-	public Item read(Long item) {
+	public ItemTest read(Long item) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement ps = connection.prepareStatement("SELECT * FROM items WHERE item_id = ?");) {
 			ps.setLong(1, item);
@@ -80,7 +80,7 @@ public class ItemDAO implements Dao<Item> {
 	
 	
 	@Override
-	public  Item create(Item item ) {
+	public  ItemTest create(ItemTest item ) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement s = connection.prepareStatement("INSERT INTO items(name,value) VALUES (?, ?)");) {
 			s.setString(1, item.getName());
@@ -96,7 +96,7 @@ public class ItemDAO implements Dao<Item> {
 	}
 
 	@Override
-	public Item update(Item item) {
+	public ItemTest update(ItemTest item) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement ps = connection.prepareStatement("UPDATE items SET name = ? ,value = ? WHERE item_id = ?");) {
 			ps.setString(1, item.getName());

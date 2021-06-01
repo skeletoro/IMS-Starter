@@ -6,10 +6,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.qa.ims.persistence.dao.ItemDAO;
-import com.qa.ims.persistence.domain.Item;
+import com.qa.ims.persistence.domain.ItemTest;
 import com.qa.ims.utils.Utils;
 
-public class ItemController implements CrudController<Item> {
+public class ItemController implements CrudController<ItemTest> {
 	public static final Logger LOGGER = LogManager.getLogger();
 
 	private ItemDAO itemDAO;
@@ -22,34 +22,34 @@ public class ItemController implements CrudController<Item> {
 	}
 
 	@Override
-	public List<Item> readAll() {
-		List<Item> items = itemDAO.readAll();
-		for (Item item : items) {
+	public List<ItemTest> readAll() {
+		List<ItemTest> items = itemDAO.readAll();
+		for (ItemTest item : items) {
 			LOGGER.info(item);
 		}
 		return items;
 	}
 
 	
-	public Item create() {
+	public ItemTest create() {
 		LOGGER.info("please enter Item Name");
 		String name = utils.getString();
 		LOGGER.info("please enter the items value");
 		Double value = utils.getDouble();
-		Item item = itemDAO.create(new Item(name, value));
+		ItemTest item = itemDAO.create(new ItemTest(name, value));
 		LOGGER.info("Item added");
 		return item;
 	}
 
 	@Override
-	public Item update() {
+	public ItemTest update() {
 		LOGGER.info("please enter the Item Id for item being updated");
 		long id = utils.getLong();
 		LOGGER.info("please enter the new item name");
 		String name = utils.getString();
 		LOGGER.info("please enter new item value");
 		Double value = utils.getDouble();
-		Item item = itemDAO.update(new Item(id, name, value));
+		ItemTest item = itemDAO.update(new ItemTest(id, name, value));
 		LOGGER.info("Item has been updated succesfully");
 		return item;
 
