@@ -64,13 +64,6 @@ public class OrderDAO implements Dao<Order> {
 
 	}
 
-	@Override
-	public Order read(Long id) {
-//		try(Connection connection = DBUtils.getInstance().getConnection();
-//				PreparedStatement ps = connection.prepareStatement(arg0)
-		return null;
-	}
-
 	// works
 	@Override
 	public Order create(Order order) {
@@ -180,6 +173,12 @@ public class OrderDAO implements Dao<Order> {
 		}
 
 		return 0;
+	}
+
+	@Override
+	public Order read(Long id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
