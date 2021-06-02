@@ -39,6 +39,7 @@ public class OrderDAO implements Dao<Order> {
 		LOGGER.info("order total is for this order is $" + total);
 		return total;
 	}
+
 	public Order idResultSet(ResultSet rSID) throws SQLException {
 		Long id = rSID.getLong("id");
 		return new Order(id);
@@ -166,12 +167,13 @@ public class OrderDAO implements Dao<Order> {
 
 	public double checkOut(Long order_Id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
-				PreparedStatement statement = connection.prepareStatement("SELECT sum(i.value*oi.quantity) FROM  items i join orders_items oi ON i.item_id = oi.item_id WHERE oi.order_id = (?)");) {			
+				PreparedStatement statement = connection.prepareStatement(
+						"SELECT sum(i.value*oi.quantity) FROM  items i join orders_items oi ON i.item_id = oi.item_id WHERE oi.order_id = (?)");) {
 			statement.setLong(1, order_Id);
 			ResultSet rsco = statement.executeQuery();
 			rsco.next();
 			return resultSetCheckout(rsco);
-		
+
 		} catch (Exception x) {
 			LOGGER.debug(x);
 			LOGGER.error(x.getMessage());

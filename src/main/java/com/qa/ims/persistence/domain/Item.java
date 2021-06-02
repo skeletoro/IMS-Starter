@@ -16,13 +16,13 @@ public class Item {
 
 	public Item(String name, double value) {
 		this.setName(name);
-		this.value= value;
+		this.value = value;
 	}
 
 	public Item(Long item_Id, String name, double value) {
 		this.setItem_Id(item_Id);
 		this.setName(name);
-		this.value= value;
+		this.value = value;
 
 	}
 
@@ -79,7 +79,5 @@ public class Item {
 			return false;
 		return true;
 	}
-
-
 
 }

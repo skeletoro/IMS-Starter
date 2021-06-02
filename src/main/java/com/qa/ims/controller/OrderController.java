@@ -27,18 +27,49 @@ public class OrderController implements CrudController<Order> {
 
 	@Override
 	public List<Order> readAll() {
-		List<Order> orders = orderDAO.readAll();
-		for (Order order : orders) {
-			LOGGER.info(order);
-		}
-		return orders;
+		boolean con = true;
+		String selection = "";
+
+		do {
+			LOGGER.info(
+					"please enter (read) to read all entries or (checkout) to view the total checkout amount for an order ID "
+							+ "(done) to exit update");
+
+			try {
+				selection = scanner.nextLine();
+
+				System.out.println("");
+				switch (selection) {
+				case "read":
+					List<Order> orders = orderDAO.readAll();
+					for (Order order : orders) {
+						LOGGER.info(order);
+					}
+					return orders;
+				case "checkout":
+					checkOut();
+					break;
+				case "done":
+					con = false;
+					break;
+				default:
+					System.out.println("invalid selection");
+					break;
+				}
+			} catch (Exception x) {
+				LOGGER.debug(x);
+				LOGGER.error(x.getMessage());
+			}
+		} while (con);
+		return null;
 	}
 
 	@Override
 	public Order create() {
+
 		LOGGER.info("please enter id for customer order belongs to begin their order");
 		Long id = utils.getLong();
-	
+
 		Order order = orderDAO.create(new Order(id));
 		LOGGER.info("Order created successfully");
 		return order;
@@ -47,15 +78,15 @@ public class OrderController implements CrudController<Order> {
 	@Override
 	// ADD ITEM REMOVE ITEM
 	public Order update() {
-		
+
 		String selection = "";
 		boolean cont = true;
 
 		do {
-			
+
 			LOGGER.info(
 					"please enter (add) to add an entry of an items to order or (remove) to remove items entered to an order "
-					+ "enter (total) to get checkout total or (done) to exit update");
+							+ "or (done) to exit update");
 			try {
 				selection = scanner.nextLine();
 
@@ -67,8 +98,6 @@ public class OrderController implements CrudController<Order> {
 				case "remove":
 					removeItems();
 					break;
-				case "total":
-					checkOut();
 				case "done":
 					cont = false;
 					break;
@@ -85,14 +114,13 @@ public class OrderController implements CrudController<Order> {
 
 		return null;
 
-		
 	}
 
 	private void checkOut() {
 		LOGGER.info("please enter the Users Order ID to view the total checkout cost for that user");
 		Long order_Id = utils.getLong();
 		orderDAO.checkOut(order_Id);
-		
+
 	}
 
 	private int removeItems() {
@@ -110,7 +138,7 @@ public class OrderController implements CrudController<Order> {
 		Long item_Id = utils.getLong();
 		LOGGER.info("please enter the quantity of item selected to add from this order");
 		Long quantity = utils.getLong();
-		Order order = orderDAO.addItems(new Order(order_Id, item_Id,quantity));
+		Order order = orderDAO.addItems(new Order(order_Id, item_Id, quantity));
 		return order;
 	}
 

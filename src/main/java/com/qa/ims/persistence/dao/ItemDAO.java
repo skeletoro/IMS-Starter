@@ -23,7 +23,7 @@ public class ItemDAO implements Dao<Item> {
 		Long item_Id = resultSet.getLong("item_id");
 		String name = resultSet.getString("name");
 		double value = resultSet.getDouble("value");
-		return new Item(item_Id, name,value);
+		return new Item(item_Id, name, value);
 
 	}
 
@@ -77,10 +77,8 @@ public class ItemDAO implements Dao<Item> {
 		return null;
 	}
 
-	
-	
 	@Override
-	public  Item create(Item item ) {
+	public Item create(Item item) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement s = connection.prepareStatement("INSERT INTO items(name,value) VALUES (?, ?)");) {
 			s.setString(1, item.getName());
@@ -98,7 +96,8 @@ public class ItemDAO implements Dao<Item> {
 	@Override
 	public Item update(Item item) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
-				PreparedStatement ps = connection.prepareStatement("UPDATE items SET name = ? ,value = ? WHERE item_id = ?");) {
+				PreparedStatement ps = connection
+						.prepareStatement("UPDATE items SET name = ? ,value = ? WHERE item_id = ?");) {
 			ps.setString(1, item.getName());
 			ps.setDouble(2, item.getValue());
 			ps.setLong(3, item.getItem_Id());

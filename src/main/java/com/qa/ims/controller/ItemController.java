@@ -30,7 +30,6 @@ public class ItemController implements CrudController<Item> {
 		return items;
 	}
 
-	
 	public Item create() {
 		LOGGER.info("please enter Item Name");
 		String name = utils.getString();
@@ -54,6 +53,7 @@ public class ItemController implements CrudController<Item> {
 		return item;
 
 	}
+
 	@Override
 	public int delete() {
 		LOGGER.info("please enter the Id for Item to delete");

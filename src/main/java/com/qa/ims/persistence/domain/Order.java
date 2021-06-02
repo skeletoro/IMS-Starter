@@ -8,8 +8,6 @@ public class Order {
 	private Long quantity;
 	private Long oi_Id;
 	private String first_Name;
-	
-
 
 //	public Order (Long oi_Id,Long order_Id) {
 //		this.setOi_Id(oi_Id);
@@ -18,24 +16,25 @@ public class Order {
 	public Order(Long id) {
 		this.setId(id);
 	}
-	
 
-	public Order (Long order_Id, Long id) {
+	public Order(Long order_Id, Long id) {
 		this.setOrder_Id(order_Id);
 		this.setId(id);
 	}
 
-	public Order(Long order_Id,  Long item_Id, Long quantity) {
+	public Order(Long order_Id, Long item_Id, Long quantity) {
 		this.setOrder_Id(order_Id);
 		this.setItem_Id(item_Id);
 		this.setQuantity(quantity);
 	}
+
 	public Order(Long order_Id, Long id, Long item_Id, Long quantity) {
 		this.setOrder_Id(order_Id);
 		this.setId(id);
 		this.setItem_Id(item_Id);
 		this.setQuantity(quantity);
 	}
+
 	public Order(Long order_Id, String first_Name, Long id, Long item_Id, Long quantity) {
 		this.setOrder_Id(order_Id);
 		this.setFirst_Name(first_Name);
@@ -43,6 +42,7 @@ public class Order {
 		this.setItem_Id(item_Id);
 		this.setQuantity(quantity);
 	}
+
 	public String getFirst_Name() {
 		return first_Name;
 	}
@@ -78,17 +78,22 @@ public class Order {
 	public Long getQuantity() {
 		return quantity;
 	}
+
 	public void setQuantity(Long quantity) {
 		this.quantity = quantity;
 	}
+
 	public Long getOi_Id() {
 		return oi_Id;
 	}
+
 	public void setOi_Id(Long oi_Id) {
 		this.oi_Id = oi_Id;
 	}
+
 	@Override
 	public String toString() {
-		return "order Id= " + order_Id + " first name= " + first_Name + ", Customer ID= " + id + ", items Id= " + item_Id + ", quantity= " + quantity + "\n";
+		return "order Id= " + order_Id + " first name= " + first_Name + ", Customer ID= " + id + ", items Id= "
+				+ item_Id + ", quantity= " + quantity + "\n";
 	}
 }
