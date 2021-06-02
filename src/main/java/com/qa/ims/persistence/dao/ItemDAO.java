@@ -119,6 +119,7 @@ public class ItemDAO implements Dao<Item> {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement ps = connection.prepareStatement("DELETE FROM items WHERE item_id = ?");) {
 			ps.setLong(1, item_Id);
+			System.out.println("Item Deleted");
 			return ps.executeUpdate();
 		} catch (Exception x) {
 			LOGGER.debug(x);
